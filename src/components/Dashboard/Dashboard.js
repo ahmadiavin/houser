@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import House from '../House/House';
+import House from "../House/House";
 import axios from "axios";
 
 class Dashboard extends Component {
@@ -9,32 +9,37 @@ class Dashboard extends Component {
     this.state = {
       houses: []
     };
-    // this.getHouses = this.getHouses.bind(this);
+    this.getHouses = this.getHouses.bind(this);
   }
   componentDidMount() {
-    axios.get("/api/houses").then(res => {
-        console.log(res.data, "house data?")
-        this.setState({
-          houses: res.data
-        });
-      })
+    this.getHouses();
   }
 
+  getHouses() {
+    axios.get("/api/houses").then(res => {
+      // console.log(res.data, "house data?")
+      this.setState({
+        houses: res.data
+      });
+    });
+  }
+  deleteHouse(id) {
+    axios.delete(`/api/houses/${id}`).then(res => this.getHouses());
+  }
 
   render() {
     const house = this.state.houses.map(house => (
-        <House key={house.id} house={house} delete={this.delete} />
-      ));
+      <House key={house.id} house={house} delete={this.deleteHouse} />
+    ));
     return (
       <div className="dashbox">
         <div className="dashheader">
-         
-          <Link to="/wizard">
+          <Link to="/wizard/step1">
             <button>Add New Property</button>
           </Link>
         </div>
         <div className="housemap">
-          <h3>House Listings</h3>
+          <h2>House Listings</h2>
           {house}
         </div>
       </div>

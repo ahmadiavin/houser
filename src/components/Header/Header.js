@@ -1,19 +1,13 @@
-import React, { Component } from "react";
+import React from 'react';
 
-class Header extends Component {
-  constructor() {
-    super();
-    this.state = {};
-  }
+import logo from "../../"
 
-  render() {
-    return (
-      <div>
-        <h2>Header</h2>
-       
-      </div>
-    );
-  }
+
+export default function Header() {
+  return (
+    <div className='Header'>
+      {/* <img src={logo} alt='logo' /> */}
+      <h1>Houser</h1>
+    </div>
+  )
 }
-
-export default Header;

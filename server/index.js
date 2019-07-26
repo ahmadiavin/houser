@@ -16,7 +16,8 @@ app.use(express.json())
 
 
 app.get('/api/houses', ctrl.getHouses)
-app.post('/api/house', ctrl.addHouse)
+app.post('/api/houses', ctrl.addHouse)
+app.delete('/api/houses/:id', ctrl.deleteHouse)
 
 const port = 4000;
 app.listen(port, () => {

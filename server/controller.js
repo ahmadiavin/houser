@@ -10,5 +10,10 @@ module.exports = {
 
     await db.add_house({ name, address, city, state, zip });
     res.sendStatus(200);
+  },
+
+  deleteHouse(req, res) {
+    const db = req.app.get("db");
+    db.delete_house(req.params.id).then(() => res.sendStatus(200));
   }
 };
