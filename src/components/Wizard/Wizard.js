@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import Axios from "axios";
 
 class Wizard extends Component {
   constructor() {
@@ -12,10 +13,17 @@ class Wizard extends Component {
       zip: 0
     };
     this.handleChange = this.handleChange.bind(this);
+    this.submit = this.submit.bind(this);
   }
 
   handleChange(prop, value) {
      this.setState({[prop]:value})
+  }
+
+  submit() {
+      Axios.post('/api/houses', this.state).then(res => {
+          this.props.history.push('/')
+      })
   }
 
   render() {
@@ -39,6 +47,9 @@ class Wizard extends Component {
           <input value={this.state.state} onChange={e => this.handleChange('state', e.target.value)}/>
           <p>Zip</p>
           <input value={this.state.zip} onChange={e => this.handleChange('zip', e.target.value)}/>
+        </div>
+        <div>
+            <button className='submit' onClick={this.submit}>Complete</button>
         </div>
       </div>
     );

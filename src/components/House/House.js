@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 function House (props) {
-  const {name, address, city, state, zip} = props.element
+  const {name, address, city, state, zip} = props.house
   return (
     <div className="housebox">
       <h2>House</h2>
